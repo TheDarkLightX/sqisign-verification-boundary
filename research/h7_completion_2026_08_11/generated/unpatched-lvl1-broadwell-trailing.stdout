@@ -1,0 +1,20 @@
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 1,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}

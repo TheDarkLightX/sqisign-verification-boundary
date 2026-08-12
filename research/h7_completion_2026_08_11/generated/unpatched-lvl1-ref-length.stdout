@@ -1,0 +1,35 @@
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        147
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        147
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 148
+    },
+    "nist": {
+      "asan_finding": 148
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}

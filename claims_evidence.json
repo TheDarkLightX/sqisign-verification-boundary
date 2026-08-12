@@ -1,0 +1,78 @@
+{
+  "schema": "isogeny-crypto/h7-public-preprint-claims/v1",
+  "status": "PUBLIC_PREPRINT_DISCLOSURE_AUTHORIZED",
+  "as_of": "2026-08-12",
+  "author": "Dana Edwards",
+  "ai_authorship": false,
+  "audited_authority": {
+    "repository": "SQISign/the-sqisign",
+    "revision": "dd133d7aca576c361a270c8e6434832535b42ecc",
+    "parameter_levels": [1, 3, 5],
+    "implementations": ["ref", "broadwell"],
+    "public_main_revision_at_cutoff": "dd133d7aca576c361a270c8e6434832535b42ecc",
+    "public_main_checked": "2026-08-12"
+  },
+  "maintainer_confirmation": {
+    "received": "2026-08-12",
+    "speaker": "Decio on behalf of the SQIsign team",
+    "independent_prior_fix_reported": true,
+    "affected_behavior_reproduced_by_maintainers": true,
+    "patched_behavior_retested_clean_by_maintainers": true,
+    "detached_exact_length_contract_confirmed": true,
+    "signed_message_lower_bound_contract_confirmed": true,
+    "immediate_publication_authorized": true,
+    "round3_release_fix_reported": true,
+    "raw_email_published": false,
+    "raw_maintainer_logs_available": false,
+    "public_fix_commit_available_at_cutoff": false,
+    "evidence_boundary": "Sanitized author-supplied correspondence summary; not a public source-level audit of the development tree."
+  },
+  "fresh_replay": {
+    "packet": "research/h7_completion_2026_08_11",
+    "receipt_sha256": "655ba5bc06fc292b9f69584d2539a45c4323c77c04a1c6f21380c97cc4b6aba1",
+    "original_pre_normalization_receipt_sha256": "a6cfe02bca804f00f6c944df719691dc15e2292b0f669859209d1bed4a186609",
+    "public_transcript_normalization": "research/h7_completion_2026_08_11/PUBLIC_TRANSCRIPT_NORMALIZATION.md",
+    "same_machine": true,
+    "complete_generated_artifacts_excluding_receipt": 196
+  },
+  "claims": [
+    {
+      "id": "H7-LEN-001",
+      "status": "CONFIRMED_BOUNDED_IMPLEMENTATION_DEFECT",
+      "claim": "At the affected revision, all 2,656 tested undersized calls in the six-authority x86 matrix produced AddressSanitizer findings rather than clean pre-decode rejection.",
+      "nearest_nonclaim": "No remote-code-execution, deployment-exploitability, forgery, confidentiality-loss, or key-recovery result is established."
+    },
+    {
+      "id": "H7-TRAIL-001",
+      "status": "CONFIRMED_CONTRACT_VIOLATION_IN_TESTED_API_DOMAIN",
+      "claim": "The affected detached verifier accepted all 1,200 tested valid-signature-plus-suffix representations even though maintainers confirmed exact detached length is required.",
+      "nearest_nonclaim": "This API-level alias is not by itself a second signature in every formal signature domain or a SUF-CMA break."
+    },
+    {
+      "id": "H7-REPAIR-001",
+      "status": "TESTED_REPAIR_AND_MAINTAINER_CONFIRMED_POLICY",
+      "claim": "The tested guards closed the complete bounded matrix, and maintainers independently developed equivalent contract checks before the report.",
+      "nearest_nonclaim": "The public fixing commit was unavailable at cutoff; byte identity between the tested patch and development-tree fix is not claimed."
+    },
+    {
+      "id": "H7-CANON-STRUCTURAL-001",
+      "status": "MACHINE_CHECKED_GENERIC_THEOREM",
+      "claim": "Under a decoder-encoder section and object verification, accepted-fiber injectivity is equivalent to accepted normalization fixed points.",
+      "nearest_nonclaim": "No production SQIsign byte-refinement theorem is established."
+    },
+    {
+      "id": "H7-XONLY-QUOTIENT-001",
+      "status": "MACHINE_CHECKED_GENERIC_THEOREM",
+      "claim": "The ordered x-only observable has simultaneous-negation orbits as its fibers in the formalized affine Weierstrass setting.",
+      "nearest_nonclaim": "The quotient geometry is classical and does not imply a production verifier or cryptographic theorem."
+    }
+  ],
+  "remaining_preprint_limitations": [
+    "not peer reviewed",
+    "same-machine project replay",
+    "maintainer raw logs unavailable",
+    "public fixing commit unavailable at cutoff",
+    "generic Lean theorems are not a production refinement",
+    "no forgery, key recovery, remote code execution, deployment exploitability, or security-proof defect claimed"
+  ]
+}

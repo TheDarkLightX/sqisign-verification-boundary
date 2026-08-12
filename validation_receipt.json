@@ -1,0 +1,63 @@
+{
+  "ai_is_author": false,
+  "author": "Dana Edwards",
+  "fresh_matrix_receipt_sha256": "655ba5bc06fc292b9f69584d2539a45c4323c77c04a1c6f21380c97cc4b6aba1",
+  "implementation_replay": {
+    "exact_kat_acceptances_after": 600,
+    "exact_kat_acceptances_before": 600,
+    "repaired_overlong_rejections": 1200,
+    "repaired_safe_rejections": 2656,
+    "unpatched_asan_findings": 2656,
+    "unpatched_overlong_acceptances": 1200,
+    "unpatched_undersized_calls": 2656
+  },
+  "lean_receipt_sha256": "753653fe8a42b1d85ecf4fcd2d1d5fb9cee209aad361a1337359a2570e40a8b8",
+  "limitations": [
+    "not peer reviewed",
+    "maintainer raw logs and private development-tree source were not supplied",
+    "the public fixing commit was unavailable at the cutoff",
+    "the generic Lean theorems are not a formal refinement of production SQIsign serialization",
+    "no forgery, key recovery, remote code execution, deployment exploitability, or mathematical-security-proof defect is claimed"
+  ],
+  "maintainer_confirmation": {
+    "immediate_publication_authorized": true,
+    "independent_prior_fix_reported": true,
+    "independent_reproduction_reported": true,
+    "intended_contracts_confirmed": true,
+    "raw_email_published": false,
+    "raw_maintainer_logs_available": false
+  },
+  "original_fresh_matrix_receipt_sha256": "a6cfe02bca804f00f6c944df719691dc15e2292b0f669859209d1bed4a186609",
+  "pdf_pages": 7,
+  "pdf_sha256": "e7af8398bec3fb1b4efd36a0b129fbe2d6b004f9817e15c6c21e3f506e30a867",
+  "public_fix_commit_available_at_cutoff": false,
+  "public_main_revision_at_cutoff": "dd133d7aca576c361a270c8e6434832535b42ecc",
+  "publication_authorized": true,
+  "responsible_disclosure_completed": true,
+  "schema": "isogeny-crypto/h7-public-preprint-receipt/v2",
+  "source_date_epoch": 1786536000,
+  "source_sha256": {
+    ".gitignore": "995cc8e05ed69a365b2eaa8871f823d322ab3bd1e99504a163393babf28287db",
+    "CITATION.cff": "1a1977589bad38030989c9e65766714f06526f96b0edbf5afa7ad61e4c7a1579",
+    "DISCLOSURE_TIMELINE.md": "a0bde6e0f745f1e530b7a37db73c5bfc2f14a740bd9429a9587b30ee37f98972",
+    "IACR_EPRINT_SUBMISSION.md": "41d7344f23032bfaf0d9a619576c34ad0630fdff97e44d4a29eb469fd93389d8",
+    "LICENSE": "85508b9757ff910428e29187f2b199070dc70e3e07c0ac02ae6b4cac5c3e6cb9",
+    "LICENSE-APACHE": "ff0decbebe4e3a7c4434fb2a8d95077ddcda317e528f7328e82828fc5eee302a",
+    "LICENSES.md": "74eb30a0115d2e6aa76283ae4c2ab0cc0cea8c1cc7ad473f6960fc34a3586662",
+    "MAINTAINER_CONFIRMATION.md": "a5c245c371ac086c704916daec765f365987730434ef3651f2bd39ca8d6e9b39",
+    "PUBLIC_ISSUE_DRAFT.md": "6188e133d9a8fe3aa5a932cb6ecf49cd77eeeb48975a17889064a21404075fae",
+    "PUBLIC_MAIN_2026_08_12.txt": "fb197276f2f2e5eb82545efb85880e1db40ef2f3f855b5c7ab63207259c9868b",
+    "README.md": "30a26d250908a5c7058955c4ee57f3e578c6f7c3f55b6f5aa8a7b64d2778e408",
+    "RELEASE_CHECKLIST.md": "741bd6bf1c4ec6e6b88412f43ffeb41b1175a8f530f9aa5730dd3ce2461db138",
+    "THIRD_PARTY_NOTICES.md": "a0a3d5a008203c62f8d3d9d304bac992eac0a34e011ec997d07866b5b26910ce",
+    "ZENODO_DEPOSIT.md": "8b4989bdea424583ffbcaab63cf523734f1f350b8dac920f9a3a6b9917f47eab",
+    "claims_evidence.json": "d507b8bac4d651abf91d631950bb811aa8a6d687181ca27dc83b6ea6da50baca",
+    "manuscript.pdf": "e7af8398bec3fb1b4efd36a0b129fbe2d6b004f9817e15c6c21e3f506e30a867",
+    "manuscript.tex": "a052922f0531e6f3acd131835791fefc1d7418c5c27553bbac1b08cf1b00d992",
+    "prepare_release.py": "ab6ed4fb8e0faea833d67e48d4791675f43fec9a8ece9ad1d444912e7abe807b",
+    "references.bib": "ca7af31b4e40528a65cc615f7a2072d1012447516284c64d4069b303539f37b6",
+    "validate_packet.py": "10822d4350a8b42d56e4aad164ba83124a836c4f6a658b9bb068e37778f2d682"
+  },
+  "status": "PASS_PUBLIC_PREPRINT_PACKET",
+  "validated_on": "2026-08-12"
+}

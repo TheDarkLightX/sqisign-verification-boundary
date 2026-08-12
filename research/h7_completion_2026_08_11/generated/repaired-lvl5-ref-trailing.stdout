@@ -1,0 +1,20 @@
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 5,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}

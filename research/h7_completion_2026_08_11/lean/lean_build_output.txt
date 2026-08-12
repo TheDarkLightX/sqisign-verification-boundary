@@ -1,0 +1,7 @@
+✔ [1490/1919] Built IsogenyCrypto.H1.SplitMonoCancellation
+✔ [2808/2813] Built IsogenyCrypto.H7.CanonicalNormalization
+✔ [2809/2813] Built IsogenyCrypto.H7.SignSynchronization
+✔ [2810/2813] Built IsogenyCrypto.H7.XCoordinateFiber
+✔ [2811/2813] Built IsogenyCrypto.H7.XOnlyQuotient
+✔ [2812/2813] Built IsogenyCrypto
+Build completed successfully.

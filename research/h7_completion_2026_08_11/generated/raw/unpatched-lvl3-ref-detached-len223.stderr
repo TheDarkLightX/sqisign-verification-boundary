@@ -1,0 +1,51 @@
+=================================================================
+==452843==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x51100000011f at pc 0x5609d6500283 bp 0x7ffd14a9d3a0 sp 0x7ffd14a9d390
+READ of size 1 at 0x51100000011f thread T0
+    #0 0x5609d6500282 in sqisign_lvl3_ref_signature_from_bytes /tmp/h7-repro.hEMNdR/matrix-source/src/verification/ref/lvlx/encode_verification.c:217
+    #1 0x5609d650d8d2 in sqisign_lvl3_ref_sqisign_verify /tmp/h7-repro.hEMNdR/matrix-source/src/sqisign.c:101
+    #2 0x5609d650dea1 in main <research-root>/tools/h7_official_length_case.c:93
+    #3 0x78a58982a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #4 0x78a58982a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #5 0x5609d64ef624 in _start (/tmp/h7-repro.hEMNdR/matrix-source/build-ref/h7_length_lvl3+0x4624) (BuildId: 3ece557a086786df537577ed9759d447077b72ac)
+
+0x51100000011f is located 0 bytes after 223-byte region [0x511000000040,0x51100000011f)
+allocated by thread T0 here:
+    #0 0x78a589cfd340 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x5609d650dc55 in main <research-root>/tools/h7_official_length_case.c:70
+    #2 0x78a58982a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x78a58982a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x5609d64ef624 in _start (/tmp/h7-repro.hEMNdR/matrix-source/build-ref/h7_length_lvl3+0x4624) (BuildId: 3ece557a086786df537577ed9759d447077b72ac)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /tmp/h7-repro.hEMNdR/matrix-source/src/verification/ref/lvlx/encode_verification.c:217 in sqisign_lvl3_ref_signature_from_bytes
+Shadow bytes around the buggy address:
+  0x510ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x510fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x510fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x511000000000: fa fa fa fa fa fa fa fa 00 00 00 00 00 00 00 00
+  0x511000000080: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x511000000100: 00 00 00[07]fa fa fa fa fa fa fa fa fa fa fa fa
+  0x511000000180: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x511000000200: 00 00 00 00 00 00 00 00 00 00 00 00 fa fa fa fa
+  0x511000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x511000000300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x511000000380: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==452843==ABORTING
