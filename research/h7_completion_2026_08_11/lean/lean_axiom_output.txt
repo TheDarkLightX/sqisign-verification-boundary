@@ -1,0 +1,7 @@
+'IsogenyCrypto.H7.acceptedFiberInjective_iff_acceptedNormalForm' does not depend on any axioms
+'IsogenyCrypto.H7.acceptedCollision_of_not_normalized' does not depend on any axioms
+'IsogenyCrypto.H7.xOnlyTriple_eq_iff_globalSign' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IsogenyCrypto.H7.xOnlyQuotientMap_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'IsogenyCrypto.H7.acceptedXOnlyFiberInjective_iff_acceptedOrbitNormalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

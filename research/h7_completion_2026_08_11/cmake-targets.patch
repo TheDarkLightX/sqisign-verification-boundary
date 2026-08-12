@@ -1,0 +1,29 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0631a59..db276f3 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -72,3 +72,24 @@ include(.cmake/bm.cmake)
+ #    enable_testing()
+ #    add_subdirectory(test)
+ #endif()
++
++set(H7_RESEARCH_ROOT "" CACHE PATH "Path to the H7 research checkout")
++if(NOT H7_RESEARCH_ROOT)
++  message(FATAL_ERROR "H7_RESEARCH_ROOT is required for local H7 targets")
++endif()
++
++foreach(H7_LEVEL 1 3 5)
++  add_executable(h7_length_lvl${H7_LEVEL}
++    "${H7_RESEARCH_ROOT}/tools/h7_official_length_case.c")
++  target_link_libraries(h7_length_lvl${H7_LEVEL} PRIVATE
++    sqisign_lvl${H7_LEVEL}_nistapi)
++  target_include_directories(h7_length_lvl${H7_LEVEL} PRIVATE
++    "${CMAKE_CURRENT_LIST_DIR}/src/nistapi/lvl${H7_LEVEL}")
++
++  add_executable(h7_detached_lvl${H7_LEVEL}
++    "${H7_RESEARCH_ROOT}/tools/h7_official_detached_kat_verify.c")
++  target_link_libraries(h7_detached_lvl${H7_LEVEL} PRIVATE
++    sqisign_lvl${H7_LEVEL}_nistapi)
++  target_include_directories(h7_detached_lvl${H7_LEVEL} PRIVATE
++    "${CMAKE_CURRENT_LIST_DIR}/src/nistapi/lvl${H7_LEVEL}")
++endforeach()

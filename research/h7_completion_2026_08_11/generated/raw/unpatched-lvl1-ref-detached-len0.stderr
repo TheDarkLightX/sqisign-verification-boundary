@@ -1,0 +1,54 @@
+=================================================================
+==441914==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x50200000002f at pc 0x61c084a043fd bp 0x7ffe222ab030 sp 0x7ffe222ab020
+READ of size 1 at 0x50200000002f thread T0
+    #0 0x61c084a043fc in sqisign_lvl1_ref_fp_decode /tmp/h7-repro.hEMNdR/matrix-source/src/gf/ref/lvl1/fp_p5248_64.c:689
+    #1 0x61c084a0f6df in sqisign_lvl1_ref_fp2_decode /tmp/h7-repro.hEMNdR/matrix-source/src/gf/ref/lvlx/fp2.c:311
+    #2 0x61c084a0f6df in fp2_from_bytes /tmp/h7-repro.hEMNdR/matrix-source/src/verification/ref/lvlx/encode_verification.c:55
+    #3 0x61c084a0f6df in sqisign_lvl1_ref_signature_from_bytes /tmp/h7-repro.hEMNdR/matrix-source/src/verification/ref/lvlx/encode_verification.c:197
+    #4 0x61c084a1c12e in sqisign_lvl1_ref_sqisign_verify /tmp/h7-repro.hEMNdR/matrix-source/src/sqisign.c:101
+    #5 0x61c084a1c6ec in main <research-root>/tools/h7_official_length_case.c:93
+    #6 0x75a00182a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #7 0x75a00182a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #8 0x61c0849fe624 in _start (/tmp/h7-repro.hEMNdR/matrix-source/build-ref/h7_length_lvl1+0x4624) (BuildId: ed6647dc71b1b5f2a74170a653d107bc95b51962)
+
+0x50200000002f is located 1 bytes before 2-byte region [0x502000000030,0x502000000032)
+allocated by thread T0 here:
+    #0 0x75a001cfd340 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x61c084a1c4b5 in main <research-root>/tools/h7_official_length_case.c:71
+    #2 0x75a00182a1c9 in __libc_start_call_main ../sysdeps/nptl/libc_start_call_main.h:58
+    #3 0x75a00182a28a in __libc_start_main_impl ../csu/libc-start.c:360
+    #4 0x61c0849fe624 in _start (/tmp/h7-repro.hEMNdR/matrix-source/build-ref/h7_length_lvl1+0x4624) (BuildId: ed6647dc71b1b5f2a74170a653d107bc95b51962)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /tmp/h7-repro.hEMNdR/matrix-source/src/gf/ref/lvl1/fp_p5248_64.c:689 in sqisign_lvl1_ref_fp_decode
+Shadow bytes around the buggy address:
+  0x501ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x502000000000: fa fa 01 fa fa[fa]02 fa fa fa fa fa fa fa fa fa
+  0x502000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==441914==ABORTING

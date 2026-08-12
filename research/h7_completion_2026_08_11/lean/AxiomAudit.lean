@@ -1,0 +1,9 @@
+import IsogenyCrypto.H7.CanonicalNormalization
+import IsogenyCrypto.H7.XCoordinateFiber
+import IsogenyCrypto.H7.XOnlyQuotient
+
+#print axioms IsogenyCrypto.H7.acceptedFiberInjective_iff_acceptedNormalForm
+#print axioms IsogenyCrypto.H7.acceptedCollision_of_not_normalized
+#print axioms IsogenyCrypto.H7.xOnlyTriple_eq_iff_globalSign
+#print axioms IsogenyCrypto.H7.xOnlyQuotientMap_injective
+#print axioms IsogenyCrypto.H7.acceptedXOnlyFiberInjective_iff_acceptedOrbitNormalForm

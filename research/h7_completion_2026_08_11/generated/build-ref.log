@@ -1,0 +1,76 @@
+-- Using 64-bit radix for gf module
+-- Configuring done (0.5s)
+-- Generating done (0.2s)
+-- Build files have been written to: /tmp/h7-repro.hEMNdR/matrix-source/build-ref
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl1
+[ 33%] Built target sqisign_common_sys
+[ 44%] Built target sqisign_gf_lvl1
+[ 66%] Built target sqisign_ec_lvl1
+[ 77%] Built target sqisign_hd_lvl1
+[ 88%] Built target sqisign_verification_lvl1
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 94%] Linking C static library libsqisign_lvl1.a
+[ 94%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_length_lvl1
+[100%] Built target h7_length_lvl1
+[  5%] Built target sqisign_mp_generic
+[ 15%] Built target sqisign_precomp_lvl3
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl3
+[ 63%] Built target sqisign_ec_lvl3
+[ 73%] Built target sqisign_hd_lvl3
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl3.a
+[ 89%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_length_lvl3
+[100%] Built target h7_length_lvl3
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 33%] Built target sqisign_common_sys
+[ 44%] Built target sqisign_gf_lvl5
+[ 61%] Built target sqisign_ec_lvl5
+[ 72%] Built target sqisign_hd_lvl5
+[ 83%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl5.a
+[ 88%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_length_lvl5
+[100%] Built target h7_length_lvl5
+[ 11%] Built target sqisign_precomp_lvl1
+[ 16%] Built target sqisign_mp_generic
+[ 27%] Built target sqisign_gf_lvl1
+[ 44%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 77%] Built target sqisign_hd_lvl1
+[ 88%] Built target sqisign_verification_lvl1
+[ 94%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Linking C executable h7_detached_lvl1
+[100%] Built target h7_detached_lvl1
+[ 15%] Built target sqisign_precomp_lvl3
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl3
+[ 63%] Built target sqisign_ec_lvl3
+[ 73%] Built target sqisign_hd_lvl3
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[ 94%] Linking C executable h7_detached_lvl3
+[100%] Built target h7_detached_lvl3
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 33%] Built target sqisign_common_sys
+[ 44%] Built target sqisign_gf_lvl5
+[ 61%] Built target sqisign_ec_lvl5
+[ 72%] Built target sqisign_hd_lvl5
+[ 83%] Built target sqisign_verification_lvl5
+[ 88%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Linking C executable h7_detached_lvl5
+[100%] Built target h7_detached_lvl5

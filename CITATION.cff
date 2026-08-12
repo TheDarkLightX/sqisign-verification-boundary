@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this preprint or artifact, please cite it using this metadata."
+title: "SQIsign Verification Boundary: Preprint and Reproducible Artifact"
+type: software
+authors:
+  - family-names: Edwards
+    given-names: Dana
+version: 1.0.0
+date-released: 2026-08-12
+repository-code: "https://github.com/TheDarkLightX/sqisign-verification-boundary"
+url: "https://github.com/TheDarkLightX/sqisign-verification-boundary"
+license: MIT
+keywords:
+  - SQIsign
+  - post-quantum cryptography
+  - parser safety
+  - signature representation
+  - AddressSanitizer
+  - Lean
+abstract: >-
+  Reproducible artifact and preprint for a bounded study of signature-length
+  authority and representation canonicality at the public SQIsign
+  verification boundary, audited at revision
+  dd133d7aca576c361a270c8e6434832535b42ecc.
+preferred-citation:
+  type: article
+  title: "Length Authority and Representation Canonicality at an SQIsign Verification Boundary"
+  authors:
+    - family-names: Edwards
+      given-names: Dana
+  year: 2026
+  url: "https://github.com/TheDarkLightX/sqisign-verification-boundary/blob/main/manuscript.pdf"

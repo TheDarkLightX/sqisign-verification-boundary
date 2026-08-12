@@ -1,0 +1,35 @@
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        223
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        223
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 224
+    },
+    "nist": {
+      "asan_finding": 224
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 3,
+  "repaired_failure_count": 0,
+  "signature_bytes": 224,
+  "tested_cases": 448,
+  "unexpected_case_count": 0
+}

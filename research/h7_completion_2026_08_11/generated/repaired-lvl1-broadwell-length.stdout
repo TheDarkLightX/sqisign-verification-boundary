@@ -1,0 +1,25 @@
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 148
+    },
+    "nist": {
+      "safe_rejection": 148
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}

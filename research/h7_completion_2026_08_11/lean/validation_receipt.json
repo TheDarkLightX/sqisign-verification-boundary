@@ -1,0 +1,45 @@
+{
+  "schema": "isogeny-crypto/h7-lean-recompile/v1",
+  "status": "PASS_EXACT_SOURCE_RECOMPILE",
+  "validated_on": "2026-08-11",
+  "toolchain": "Lean 4.19.0, commit 6caaee842e94",
+  "mathlib_revision": "c44e0c8ee63ca166450922a373c7409c5d26b00b",
+  "source_authority": "origin/agent/h7-xonly-quotient@2bc61ce2619af0b66ef91bd137c88e8e3805b8e2",
+  "exact_frozen_h7_source_hashes_match": true,
+  "commands": [
+    {
+      "command": "lake build",
+      "exit_code": 0,
+      "output": "lean_build_output.txt"
+    },
+    {
+      "command": "lake env lean AxiomAudit.lean",
+      "exit_code": 0,
+      "output": "lean_axiom_output.txt"
+    }
+  ],
+  "placeholder_scan_matches": 0,
+  "custom_axioms_or_unsafe_matches": 0,
+  "axiom_surface": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "source_sha256": {
+    "AxiomAudit.lean": "c6d06ef465dea05047411a64b696015a62797f01c503c71f797c437d238db1c1",
+    "IsogenyCrypto.lean": "ea0bef6ca76160ef5576b15ff0e497d0790649b4b9301254a473cdb116f32cc9",
+    "IsogenyCrypto/H1/SplitMonoCancellation.lean": "50502091e334ae890f518f9cb124380a7bc59fa5fa1eb2457332b730c970a395",
+    "IsogenyCrypto/H7/CanonicalNormalization.lean": "3d46687e1e7e53485240e09d3754dfa7c454e752e12358ebc855ded5878972ce",
+    "IsogenyCrypto/H7/SignSynchronization.lean": "34614c04058f3150e849168caab798891cac45488aeddaf010b2e0b57baca9dd",
+    "IsogenyCrypto/H7/XCoordinateFiber.lean": "b95ae083821a4966b29b9487e0e1c3ee082af7f108d532c9145528d4854d5fa0",
+    "IsogenyCrypto/H7/XOnlyQuotient.lean": "aabee24b7011973d297ae9b7b54ab11f6b2131f54b18757e26070e967fb94ad2",
+    "lakefile.toml": "b0d0a88eb58890393178331439c37b8e09ef20ded015b28c8a47307109f97d75",
+    "lake-manifest.json": "b1c1f876e0d8ceceeb8f1bb843ab00e6a6f103b3e7b0cbcee93a0e7898e2785d",
+    "lean-toolchain": "ee6fd37555065223ddad24dff70b5447dfbac23c14f48fb8e3ddf266104bfa87"
+  },
+  "nonclaims": [
+    "The generic theorems do not instantiate the production SQIsign decoder, verifier, or byte domain.",
+    "No end-to-end formal verification of production serialization is claimed.",
+    "This same-project recompile is not independent theorem review."
+  ]
+}
