@@ -4,3 +4,5 @@ preprint/*.blg
 preprint/*.log
 preprint/*.out
 preprint/manuscript.pdf
+preprint/*.tex
+preprint/*.bib
