@@ -1,0 +1,26 @@
+diff --git a/src/sqisign.c b/src/sqisign.c
+--- a/src/sqisign.c
++++ b/src/sqisign.c
+@@ -65,6 +65,11 @@ sqisign_open(unsigned char *m,
+     public_key_t pkt = { 0 };
+     signature_t sigt;
+ 
++    if (smlen < SIGNATURE_BYTES) {
++        *mlen = 0;
++        return 1;
++    }
++
+     public_key_from_bytes(&pkt, pk);
+     signature_from_bytes(&sigt, sm);
+ 
+@@ -96,6 +101,10 @@ sqisign_verify(const unsigned char *m,
+     public_key_t pkt = { 0 };
+     signature_t sigt;
+ 
++    if (siglen != SIGNATURE_BYTES) {
++        return 1;
++    }
++
+     public_key_from_bytes(&pkt, pk);
+     signature_from_bytes(&sigt, sig);
+ 

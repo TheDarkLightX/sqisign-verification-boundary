@@ -1,0 +1,2381 @@
+H7 SQIsign x86 reproduction
+2026-08-12T00:05:02+00:00
+pinned_revision=dd133d7aca576c361a270c8e6434832535b42ecc
+source_revision=dd133d7aca576c361a270c8e6434832535b42ecc
+source_is_current_and_pinned=true
+Linux 3427cb0cd994 6.10.14-linuxkit #1 SMP Sat May 17 08:28:57 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit
+Byte Order:                           Little Endian
+CPU(s):                               16
+On-line CPU(s) list:                  0-15
+Vendor ID:                            Apple
+Model name:                           -
+Model:                                0
+Thread(s) per core:                   1
+Core(s) per socket:                   16
+Socket(s):                            1
+Stepping:                             0x0
+BogoMIPS:                             48.00
+Flags:                                fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 asimddp sha512 asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp flagm2 frint i8mm bf16 bti afp
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Not affected
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Not affected
+Vulnerability Spec rstack overflow:   Not affected
+Vulnerability Spec store bypass:      Vulnerable
+Vulnerability Spectre v1:             Mitigation; __user pointer sanitization
+Vulnerability Spectre v2:             Not affected
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+flags		: fpu tsc de cx8 apic sep cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx lm rep_good nopl pni cpuid pclmulqdq ssse3 cx16 sse4_1 popcnt sse4_2 aes lahf_lm movbe fma avx f16c rdrand bmi1 avx2 bmi2
+gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Copyright (C) 2023 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+cmake version 3.28.3
+
+CMake suite maintained and supported by Kitware (kitware.com/cmake).
+Python 3.12.3
+qemu-x86_64 version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+9a323799608b2a0d5b1dd772cdb0169cf8c5607fcee3b6a71623747f35cad937  /work/sqisign-source.tar
+aadca6d0e53397f07c06bf576b5ed989d46f0ef79517d5d52fbc08cd5d003256  /work/material/.github/workflows/h7-official-canonicality-audit.yml
+a4d4ba9006c17e923e6595291bae539e8f0b21ba682f22f4a41fa06bb20a420e  /work/material/.github/workflows/h7-official-parser-audit.yml
+8729522c85e7361daf3400a077a4de646fc11e8b612e71d8bece95980c49b0f9  /work/material/patches/sqisign-dd133d7-h7-length-guards.patch
+1dcb8efbfba7607e646ce1643d84d1f1f3fa4d6bbbb3e4928057af5800553414  /work/material/tools/h7_canonicality_client.c
+57fde422013167931f2e2ac6a1970e5b43a1a045c3134dc0f241fd60540c4997  /work/material/tools/h7_canonicality_server.c
+2ffdbd8441cd77cc251a35e2e764e266490d9984771431697c8e9883e2cb42b8  /work/material/tools/h7_detached_client.c
+d8dfa66a599315729f87004f128e517ca94e5bf5accceef5e6d95c1cf5849c89  /work/material/tools/h7_detached_server.c
+aa8ccb6e864a0610fd7042c06f91e7f6a9d8f5c590bef87ee5484df28f709b17  /work/material/tools/h7_instrument_rejection_trace.py
+2bb9bb5817bc3f0d3d342172979d3468a8f4ba56e6ab077fef1090370476b972  /work/material/tools/h7_official_canonicality_kat.py
+9df571e3a6cf1b087cd23e37165f1d8391bf8f30239531ee3b7b35dd4611beb3  /work/material/tools/h7_official_detached_kat_verify.c
+8847ae495b71a08a9ee6e8b9e24a9ce61deed2588b40b1443df7fb7e4d6f084e  /work/material/tools/h7_official_detached_trailing_kat.py
+a73c9fa37b8061e27f807603ddd54cfe496ef0e1280f3c9332b218bdcd00d913  /work/material/tools/h7_official_kat_verify.c
+0dd36b6c236199a3d986ca2f0f8c30f5a5553eb478d350696ec62789e64a71fd  /work/material/tools/h7_official_length_case.c
+f848c204ce05e8181224e0b8f204aa77f0a3b078b2b5f5ac8193d779dda90b03  /work/material/tools/h7_official_length_matrix.py
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl1-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl1-ref/build
+[ 10%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/ec_params.c.o
+[ 10%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 10%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/e0_basis.c.o
+[ 15%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/hd_splitting_transforms.c.o
+[ 15%] Linking C static library libsqisign_mp_generic.a
+[ 15%] Built target sqisign_mp_generic
+[ 15%] Linking C static library libsqisign_precomp_lvl1.a
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 21%] Built target sqisign_precomp_lvl1
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 26%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp_p5248_64.c.o
+[ 31%] Linking C static library libsqisign_common_sys.a
+[ 31%] Built target sqisign_common_sys
+[ 36%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp.c.o
+[ 36%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp2.c.o
+[ 42%] Linking C static library libsqisign_gf_lvl1.a
+[ 42%] Built target sqisign_gf_lvl1
+[ 42%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec_jac.c.o
+[ 47%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec.c.o
+[ 52%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xisog.c.o
+[ 52%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xeval.c.o
+[ 57%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/isog_chains.c.o
+[ 57%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/basis.c.o
+[ 63%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/biextension.c.o
+[ 63%] Linking C static library libsqisign_ec_lvl1.a
+[ 63%] Built target sqisign_ec_lvl1
+[ 68%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/hd.c.o
+[ 68%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_structure.c.o
+[ 68%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_isogenies.c.o
+[ 73%] Linking C static library libsqisign_hd_lvl1.a
+[ 73%] Built target sqisign_hd_lvl1
+[ 73%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/common.c.o
+[ 78%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/encode_verification.c.o
+[ 78%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/verify.c.o
+[ 84%] Linking C static library libsqisign_verification_lvl1.a
+[ 84%] Built target sqisign_verification_lvl1
+[ 84%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl1.a
+[ 89%] Built target sqisign_lvl1
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl1_nistapi.dir/nistapi/lvl1/api.c.o
+[ 94%] Linking C static library libsqisign_lvl1_nistapi.a
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 15%] Built target sqisign_precomp_lvl1
+[ 15%] Built target sqisign_mp_generic
+[ 36%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl1
+[ 63%] Built target sqisign_ec_lvl1
+[ 73%] Built target sqisign_hd_lvl1
+[ 84%] Built target sqisign_verification_lvl1
+[ 89%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        147
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        147
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 148
+    },
+    "nist": {
+      "asan_finding": 148
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 1,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[  5%] Built target sqisign_mp_generic
+[ 15%] Built target sqisign_precomp_lvl1
+[ 42%] Built target sqisign_gf_lvl1
+[ 42%] Built target sqisign_common_sys
+[ 63%] Built target sqisign_ec_lvl1
+[ 73%] Built target sqisign_hd_lvl1
+[ 84%] Built target sqisign_verification_lvl1
+[ 84%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl1.a
+[ 89%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 15%] Built target sqisign_mp_generic
+[ 15%] Built target sqisign_precomp_lvl1
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl1
+[ 63%] Built target sqisign_ec_lvl1
+[ 73%] Built target sqisign_hd_lvl1
+[ 84%] Built target sqisign_verification_lvl1
+[ 89%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 148
+    },
+    "nist": {
+      "safe_rejection": 148
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 1,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl1-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl1-ref/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl1-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl1-ref/build
+[  0%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/ec_params.c.o
+[  0%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/e0_basis.c.o
+[  5%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/hd_splitting_transforms.c.o
+[ 11%] Linking C static library libsqisign_precomp_lvl1.a
+[ 16%] Linking C static library libsqisign_mp_generic.a
+[ 16%] Built target sqisign_precomp_lvl1
+[ 16%] Built target sqisign_mp_generic
+[ 16%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 27%] Linking C static library libsqisign_common_sys.a
+[ 33%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp_p5248_64.c.o
+[ 33%] Built target sqisign_common_sys
+[ 33%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp.c.o
+[ 38%] Building C object src/gf/ref/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp2.c.o
+[ 38%] Linking C static library libsqisign_gf_lvl1.a
+[ 38%] Built target sqisign_gf_lvl1
+[ 44%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec.c.o
+[ 44%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec_jac.c.o
+[ 44%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xisog.c.o
+[ 50%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xeval.c.o
+[ 50%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/isog_chains.c.o
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/basis.c.o
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/biextension.c.o
+[ 61%] Linking C static library libsqisign_ec_lvl1.a
+[ 61%] Built target sqisign_ec_lvl1
+[ 66%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/hd.c.o
+[ 66%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_isogenies.c.o
+[ 72%] Linking C static library libsqisign_hd_lvl1.a
+[ 72%] Built target sqisign_hd_lvl1
+[ 72%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/common.c.o
+[ 77%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/encode_verification.c.o
+[ 77%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/verify.c.o
+[ 83%] Linking C static library libsqisign_verification_lvl1.a
+[ 83%] Built target sqisign_verification_lvl1
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl1.a
+[ 88%] Built target sqisign_lvl1
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl1_nistapi.dir/nistapi/lvl1/api.c.o
+[ 94%] Linking C static library libsqisign_lvl1_nistapi.a
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "ref",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 1,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl1-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl1-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl1-broadwell/build
+[  5%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/ec_params.c.o
+[  5%] Linking C static library libsqisign_mp_generic.a
+[ 11%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/e0_basis.c.o
+[ 11%] Built target sqisign_mp_generic
+[ 16%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/gf5248.c.o
+[ 16%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/hd_splitting_transforms.c.o
+[ 22%] Linking C static library libsqisign_precomp_lvl1.a
+[ 22%] Built target sqisign_precomp_lvl1
+[ 22%] Building ASM object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp_asm.S.o
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 33%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 33%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp2.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 38%] Linking C static library libsqisign_gf_lvl1.a
+[ 38%] Built target sqisign_gf_lvl1
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 50%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 50%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec.c.o
+[ 50%] Linking C static library libsqisign_common_sys.a
+[ 50%] Built target sqisign_common_sys
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xisog.c.o
+[ 61%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xeval.c.o
+[ 61%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/isog_chains.c.o
+[ 66%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/basis.c.o
+[ 66%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/biextension.c.o
+[ 66%] Linking C static library libsqisign_ec_lvl1.a
+[ 66%] Built target sqisign_ec_lvl1
+[ 66%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/hd.c.o
+[ 72%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_isogenies.c.o
+[ 72%] Linking C static library libsqisign_hd_lvl1.a
+[ 72%] Built target sqisign_hd_lvl1
+[ 72%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/encode_verification.c.o
+[ 77%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/common.c.o
+[ 83%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/verify.c.o
+[ 83%] Linking C static library libsqisign_verification_lvl1.a
+[ 83%] Built target sqisign_verification_lvl1
+[ 83%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl1.a
+[ 88%] Built target sqisign_lvl1
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl1_nistapi.dir/nistapi/lvl1/api.c.o
+[ 94%] Linking C static library libsqisign_lvl1_nistapi.a
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 16%] Built target sqisign_precomp_lvl1
+[ 16%] Built target sqisign_mp_generic
+[ 27%] Built target sqisign_gf_lvl1
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.6s)
+-- Generating done (0.2s)
+-- Build files have been written to: /work/parser-lvl1-broadwell/release-build
+[  0%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/ec_params.c.o
+[  5%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 11%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/e0_basis.c.o
+[ 11%] Linking C static library libsqisign_mp_generic.a
+[ 11%] Built target sqisign_mp_generic
+[ 11%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/hd_splitting_transforms.c.o
+[ 16%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/gf5248.c.o
+[ 22%] Linking C static library libsqisign_precomp_lvl1.a
+[ 22%] Built target sqisign_precomp_lvl1
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 27%] Building ASM object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp_asm.S.o
+[ 33%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 33%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp2.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 38%] Linking C static library libsqisign_gf_lvl1.a
+[ 38%] Built target sqisign_gf_lvl1
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 50%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 50%] Linking C static library libsqisign_common_sys.a
+[ 50%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec.c.o
+[ 50%] Built target sqisign_common_sys
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xisog.c.o
+[ 61%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xeval.c.o
+[ 61%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/isog_chains.c.o
+[ 66%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/basis.c.o
+[ 66%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/biextension.c.o
+[ 66%] Linking C static library libsqisign_ec_lvl1.a
+[ 66%] Built target sqisign_ec_lvl1
+[ 66%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/hd.c.o
+[ 72%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_isogenies.c.o
+[ 72%] Linking C static library libsqisign_hd_lvl1.a
+[ 72%] Built target sqisign_hd_lvl1
+[ 77%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/encode_verification.c.o
+[ 77%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/common.c.o
+[ 83%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/verify.c.o
+[ 83%] Linking C static library libsqisign_verification_lvl1.a
+[ 83%] Built target sqisign_verification_lvl1
+[ 83%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl1.a
+[ 88%] Built target sqisign_lvl1
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl1_nistapi.dir/nistapi/lvl1/api.c.o
+[ 94%] Linking C static library libsqisign_lvl1_nistapi.a
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[ 16%] Built target sqisign_precomp_lvl1
+[ 16%] Built target sqisign_mp_generic
+[ 44%] Built target sqisign_common_sys
+[ 50%] Built target sqisign_gf_lvl1
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Building C object CMakeFiles/h7_detached_server.dir/work/material/tools/h7_detached_server.c.o
+[100%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+runtime=persistent Broadwell Release verifier under qemu-x86_64 -cpu max
+separation=undersized matrix remains in ASan build; exact/suffix verdicts use Release
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        147
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        147
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 148
+    },
+    "nist": {
+      "asan_finding": 148
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 1,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl1
+[ 27%] Built target sqisign_gf_lvl1
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 83%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl1.a
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 11%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl1
+[ 27%] Built target sqisign_gf_lvl1
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[ 11%] Built target sqisign_precomp_lvl1
+[ 16%] Built target sqisign_mp_generic
+[ 27%] Built target sqisign_gf_lvl1
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 83%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl1.a
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl1
+[ 50%] Built target sqisign_gf_lvl1
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl1
+[ 72%] Built target sqisign_hd_lvl1
+[ 83%] Built target sqisign_verification_lvl1
+[ 88%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[ 94%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 148
+    },
+    "nist": {
+      "safe_rejection": 148
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 1,
+  "repaired_failure_count": 0,
+  "signature_bytes": 148,
+  "tested_cases": 296,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 1,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl1-broadwell
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl1-broadwell/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl1-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl1-broadwell/build
+[  0%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/ec_params.c.o
+[  0%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/e0_basis.c.o
+[ 10%] Linking C static library libsqisign_mp_generic.a
+[ 10%] Built target sqisign_mp_generic
+[ 10%] Building C object src/precomp/ref/lvl1/CMakeFiles/sqisign_precomp_lvl1.dir/hd_splitting_transforms.c.o
+[ 10%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/gf5248.c.o
+[ 15%] Linking C static library libsqisign_precomp_lvl1.a
+[ 15%] Built target sqisign_precomp_lvl1
+[ 15%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 21%] Building ASM object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp_asm.S.o
+[ 21%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/fp.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 31%] Building C object src/gf/broadwell/lvl1/CMakeFiles/sqisign_gf_lvl1.dir/__/lvlx/fp2.c.o
+[ 31%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 31%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 36%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 36%] Linking C static library libsqisign_gf_lvl1.a
+[ 36%] Built target sqisign_gf_lvl1
+[ 36%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 42%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 42%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 47%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec.c.o
+[ 52%] Linking C static library libsqisign_common_sys.a
+[ 52%] Built target sqisign_common_sys
+[ 52%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/ec_jac.c.o
+[ 57%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xisog.c.o
+[ 57%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/xeval.c.o
+[ 63%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/isog_chains.c.o
+[ 63%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/basis.c.o
+[ 68%] Building C object src/ec/ref/lvl1/CMakeFiles/sqisign_ec_lvl1.dir/__/lvlx/biextension.c.o
+[ 68%] Linking C static library libsqisign_ec_lvl1.a
+[ 68%] Built target sqisign_ec_lvl1
+[ 73%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_structure.c.o
+[ 73%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/hd.c.o
+[ 78%] Building C object src/hd/ref/lvl1/CMakeFiles/sqisign_hd_lvl1.dir/__/lvlx/theta_isogenies.c.o
+[ 78%] Linking C static library libsqisign_hd_lvl1.a
+[ 78%] Built target sqisign_hd_lvl1
+[ 84%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/common.c.o
+[ 84%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/encode_verification.c.o
+[ 89%] Building C object src/verification/ref/lvl1/CMakeFiles/sqisign_verification_lvl1.dir/__/lvlx/verify.c.o
+[ 89%] Linking C static library libsqisign_verification_lvl1.a
+[ 89%] Built target sqisign_verification_lvl1
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl1.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl1.a
+[ 89%] Built target sqisign_lvl1
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl1_nistapi.dir/nistapi/lvl1/api.c.o
+[ 94%] Linking C static library libsqisign_lvl1_nistapi.a
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 15%] Built target sqisign_precomp_lvl1
+[ 47%] Built target sqisign_common_sys
+[ 47%] Built target sqisign_gf_lvl1
+[ 68%] Built target sqisign_ec_lvl1
+[ 78%] Built target sqisign_hd_lvl1
+[ 89%] Built target sqisign_verification_lvl1
+[ 89%] Built target sqisign_lvl1
+[ 94%] Built target sqisign_lvl1_nistapi
+[100%] Building C object CMakeFiles/h7_canonicality_server.dir/work/material/tools/h7_canonicality_server.c.o
+[100%] Linking C executable h7_canonicality_server
+[100%] Built target h7_canonicality_server
+runtime=persistent Broadwell canonicality verifier under qemu-x86_64 -cpu max
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "broadwell",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 1,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl1-broadwell
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl3-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl3-ref/build
+[ 10%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 10%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/ec_params.c.o
+[ 10%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/e0_basis.c.o
+[ 15%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/hd_splitting_transforms.c.o
+[ 15%] Linking C static library libsqisign_mp_generic.a
+[ 15%] Built target sqisign_mp_generic
+[ 15%] Linking C static library libsqisign_precomp_lvl3.a
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 21%] Built target sqisign_precomp_lvl3
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 26%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp_p65376_64.c.o
+[ 31%] Linking C static library libsqisign_common_sys.a
+[ 31%] Built target sqisign_common_sys
+[ 36%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp.c.o
+[ 36%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp2.c.o
+[ 42%] Linking C static library libsqisign_gf_lvl3.a
+[ 42%] Built target sqisign_gf_lvl3
+[ 47%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec.c.o
+[ 47%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec_jac.c.o
+[ 52%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xisog.c.o
+[ 52%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xeval.c.o
+[ 57%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/isog_chains.c.o
+[ 57%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/basis.c.o
+[ 63%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/biextension.c.o
+[ 63%] Linking C static library libsqisign_ec_lvl3.a
+[ 63%] Built target sqisign_ec_lvl3
+[ 63%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/hd.c.o
+[ 68%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_structure.c.o
+[ 68%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_isogenies.c.o
+[ 73%] Linking C static library libsqisign_hd_lvl3.a
+[ 73%] Built target sqisign_hd_lvl3
+[ 73%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/common.c.o
+[ 78%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/encode_verification.c.o
+[ 78%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/verify.c.o
+[ 84%] Linking C static library libsqisign_verification_lvl3.a
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl3.a
+[ 89%] Built target sqisign_lvl3
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl3_nistapi.dir/nistapi/lvl3/api.c.o
+[ 94%] Linking C static library libsqisign_lvl3_nistapi.a
+[ 94%] Built target sqisign_lvl3_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 15%] Built target sqisign_precomp_lvl3
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl3
+[ 63%] Built target sqisign_ec_lvl3
+[ 73%] Built target sqisign_hd_lvl3
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        223
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        223
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 224
+    },
+    "nist": {
+      "asan_finding": 224
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 3,
+  "repaired_failure_count": 0,
+  "signature_bytes": 224,
+  "tested_cases": 448,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 3,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[ 15%] Built target sqisign_precomp_lvl3
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl3
+[ 63%] Built target sqisign_ec_lvl3
+[ 73%] Built target sqisign_hd_lvl3
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl3.a
+[ 89%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 15%] Built target sqisign_precomp_lvl3
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_gf_lvl3
+[ 42%] Built target sqisign_common_sys
+[ 63%] Built target sqisign_ec_lvl3
+[ 73%] Built target sqisign_hd_lvl3
+[ 84%] Built target sqisign_verification_lvl3
+[ 89%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 224
+    },
+    "nist": {
+      "safe_rejection": 224
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 3,
+  "repaired_failure_count": 0,
+  "signature_bytes": 224,
+  "tested_cases": 448,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 3,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl3-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl3-ref/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl3-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl3-ref/build
+[  0%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  0%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/ec_params.c.o
+[  5%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/e0_basis.c.o
+[  5%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/hd_splitting_transforms.c.o
+[ 11%] Linking C static library libsqisign_precomp_lvl3.a
+[ 16%] Linking C static library libsqisign_mp_generic.a
+[ 16%] Built target sqisign_precomp_lvl3
+[ 16%] Built target sqisign_mp_generic
+[ 16%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 27%] Linking C static library libsqisign_common_sys.a
+[ 33%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp_p65376_64.c.o
+[ 33%] Built target sqisign_common_sys
+[ 33%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp.c.o
+[ 38%] Building C object src/gf/ref/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp2.c.o
+[ 38%] Linking C static library libsqisign_gf_lvl3.a
+[ 38%] Built target sqisign_gf_lvl3
+[ 38%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec.c.o
+[ 44%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec_jac.c.o
+[ 44%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xisog.c.o
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xeval.c.o
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/isog_chains.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/basis.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/biextension.c.o
+[ 61%] Linking C static library libsqisign_ec_lvl3.a
+[ 61%] Built target sqisign_ec_lvl3
+[ 66%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/hd.c.o
+[ 66%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_isogenies.c.o
+[ 72%] Linking C static library libsqisign_hd_lvl3.a
+[ 72%] Built target sqisign_hd_lvl3
+[ 72%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/common.c.o
+[ 77%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/encode_verification.c.o
+[ 77%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/verify.c.o
+[ 83%] Linking C static library libsqisign_verification_lvl3.a
+[ 83%] Built target sqisign_verification_lvl3
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl3.a
+[ 88%] Built target sqisign_lvl3
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl3_nistapi.dir/nistapi/lvl3/api.c.o
+[ 94%] Linking C static library libsqisign_lvl3_nistapi.a
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "ref",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 3,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl3-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl3-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl3-broadwell/build
+[  0%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/ec_params.c.o
+[  5%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Linking C static library libsqisign_mp_generic.a
+[ 10%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/e0_basis.c.o
+[ 10%] Built target sqisign_mp_generic
+[ 15%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/gf65376.c.o
+[ 15%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/hd_splitting_transforms.c.o
+[ 15%] Linking C static library libsqisign_precomp_lvl3.a
+[ 15%] Built target sqisign_precomp_lvl3
+[ 20%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 20%] Building ASM object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp_asm.S.o
+[ 25%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp.c.o
+[ 25%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 30%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp2.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 35%] Linking C static library libsqisign_gf_lvl3.a
+[ 35%] Built target sqisign_gf_lvl3
+[ 40%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 40%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 45%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 45%] Linking C static library libsqisign_common_sys.a
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec.c.o
+[ 50%] Built target sqisign_common_sys
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xisog.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xeval.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/isog_chains.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/basis.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/biextension.c.o
+[ 65%] Linking C static library libsqisign_ec_lvl3.a
+[ 65%] Built target sqisign_ec_lvl3
+[ 70%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/hd.c.o
+[ 70%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_structure.c.o
+[ 75%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_isogenies.c.o
+[ 75%] Linking C static library libsqisign_hd_lvl3.a
+[ 75%] Built target sqisign_hd_lvl3
+[ 75%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/common.c.o
+[ 80%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/encode_verification.c.o
+[ 80%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/verify.c.o
+[ 85%] Linking C static library libsqisign_verification_lvl3.a
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 90%] Linking C static library libsqisign_lvl3.a
+[ 90%] Built target sqisign_lvl3
+[ 95%] Building C object src/CMakeFiles/sqisign_lvl3_nistapi.dir/nistapi/lvl3/api.c.o
+[ 95%] Linking C static library libsqisign_lvl3_nistapi.a
+[ 95%] Built target sqisign_lvl3_nistapi
+[ 95%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 10%] Built target sqisign_mp_generic
+[ 10%] Built target sqisign_precomp_lvl3
+[ 45%] Built target sqisign_common_sys
+[ 45%] Built target sqisign_gf_lvl3
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[ 95%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl3-broadwell/release-build
+[  0%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/ec_params.c.o
+[  5%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 10%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/e0_basis.c.o
+[ 10%] Linking C static library libsqisign_mp_generic.a
+[ 10%] Built target sqisign_mp_generic
+[ 10%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/hd_splitting_transforms.c.o
+[ 15%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/gf65376.c.o
+[ 15%] Linking C static library libsqisign_precomp_lvl3.a
+[ 15%] Built target sqisign_precomp_lvl3
+[ 20%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 20%] Building ASM object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp_asm.S.o
+[ 20%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 25%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp.c.o
+[ 25%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp2.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 35%] Linking C static library libsqisign_gf_lvl3.a
+[ 35%] Built target sqisign_gf_lvl3
+[ 40%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 40%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 45%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 45%] Linking C static library libsqisign_common_sys.a
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec.c.o
+[ 50%] Built target sqisign_common_sys
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xisog.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xeval.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/isog_chains.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/basis.c.o
+[ 60%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/biextension.c.o
+[ 65%] Linking C static library libsqisign_ec_lvl3.a
+[ 65%] Built target sqisign_ec_lvl3
+[ 70%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/hd.c.o
+[ 70%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_structure.c.o
+[ 75%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_isogenies.c.o
+[ 75%] Linking C static library libsqisign_hd_lvl3.a
+[ 75%] Built target sqisign_hd_lvl3
+[ 80%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/encode_verification.c.o
+[ 80%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/common.c.o
+[ 80%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/verify.c.o
+[ 85%] Linking C static library libsqisign_verification_lvl3.a
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 90%] Linking C static library libsqisign_lvl3.a
+[ 90%] Built target sqisign_lvl3
+[ 95%] Building C object src/CMakeFiles/sqisign_lvl3_nistapi.dir/nistapi/lvl3/api.c.o
+[ 95%] Linking C static library libsqisign_lvl3_nistapi.a
+[ 95%] Built target sqisign_lvl3_nistapi
+[ 95%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 10%] Built target sqisign_precomp_lvl3
+[ 45%] Built target sqisign_gf_lvl3
+[ 45%] Built target sqisign_common_sys
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[100%] Building C object CMakeFiles/h7_detached_server.dir/work/material/tools/h7_detached_server.c.o
+[100%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+runtime=persistent Broadwell Release verifier under qemu-x86_64 -cpu max
+separation=undersized matrix remains in ASan build; exact/suffix verdicts use Release
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        223
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        223
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 224
+    },
+    "nist": {
+      "asan_finding": 224
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 3,
+  "repaired_failure_count": 0,
+  "signature_bytes": 224,
+  "tested_cases": 448,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 3,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[  5%] Built target sqisign_precomp_lvl3
+[ 10%] Built target sqisign_mp_generic
+[ 25%] Built target sqisign_gf_lvl3
+[ 45%] Built target sqisign_common_sys
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 90%] Linking C static library libsqisign_lvl3.a
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[  5%] Built target sqisign_mp_generic
+[ 10%] Built target sqisign_precomp_lvl3
+[ 25%] Built target sqisign_gf_lvl3
+[ 45%] Built target sqisign_common_sys
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 10%] Built target sqisign_precomp_lvl3
+[ 30%] Built target sqisign_common_sys
+[ 45%] Built target sqisign_gf_lvl3
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 90%] Linking C static library libsqisign_lvl3.a
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[ 10%] Built target sqisign_mp_generic
+[ 10%] Built target sqisign_precomp_lvl3
+[ 45%] Built target sqisign_common_sys
+[ 45%] Built target sqisign_gf_lvl3
+[ 65%] Built target sqisign_ec_lvl3
+[ 75%] Built target sqisign_hd_lvl3
+[ 85%] Built target sqisign_verification_lvl3
+[ 90%] Built target sqisign_lvl3
+[ 95%] Built target sqisign_lvl3_nistapi
+[ 95%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 224
+    },
+    "nist": {
+      "safe_rejection": 224
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 3,
+  "repaired_failure_count": 0,
+  "signature_bytes": 224,
+  "tested_cases": 448,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 3,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl3-broadwell
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl3-broadwell/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl3-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl3-broadwell/build
+[  0%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/ec_params.c.o
+[  0%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  0%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/e0_basis.c.o
+[  5%] Linking C static library libsqisign_mp_generic.a
+[  5%] Built target sqisign_mp_generic
+[  5%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/gf65376.c.o
+[ 11%] Building C object src/precomp/ref/lvl3/CMakeFiles/sqisign_precomp_lvl3.dir/hd_splitting_transforms.c.o
+[ 11%] Linking C static library libsqisign_precomp_lvl3.a
+[ 11%] Built target sqisign_precomp_lvl3
+[ 11%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 16%] Building ASM object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp_asm.S.o
+[ 16%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/fp.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 27%] Building C object src/gf/broadwell/lvl3/CMakeFiles/sqisign_gf_lvl3.dir/__/lvlx/fp2.c.o
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 27%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 33%] Linking C static library libsqisign_gf_lvl3.a
+[ 33%] Built target sqisign_gf_lvl3
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 38%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 44%] Linking C static library libsqisign_common_sys.a
+[ 44%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec.c.o
+[ 44%] Built target sqisign_common_sys
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/ec_jac.c.o
+[ 50%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xisog.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/xeval.c.o
+[ 55%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/isog_chains.c.o
+[ 61%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/basis.c.o
+[ 61%] Building C object src/ec/ref/lvl3/CMakeFiles/sqisign_ec_lvl3.dir/__/lvlx/biextension.c.o
+[ 61%] Linking C static library libsqisign_ec_lvl3.a
+[ 61%] Built target sqisign_ec_lvl3
+[ 66%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/hd.c.o
+[ 66%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_structure.c.o
+[ 66%] Building C object src/hd/ref/lvl3/CMakeFiles/sqisign_hd_lvl3.dir/__/lvlx/theta_isogenies.c.o
+[ 72%] Linking C static library libsqisign_hd_lvl3.a
+[ 72%] Built target sqisign_hd_lvl3
+[ 72%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/common.c.o
+[ 77%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/encode_verification.c.o
+[ 77%] Building C object src/verification/ref/lvl3/CMakeFiles/sqisign_verification_lvl3.dir/__/lvlx/verify.c.o
+[ 83%] Linking C static library libsqisign_verification_lvl3.a
+[ 83%] Built target sqisign_verification_lvl3
+[ 83%] Building C object src/CMakeFiles/sqisign_lvl3.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl3.a
+[ 88%] Built target sqisign_lvl3
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl3_nistapi.dir/nistapi/lvl3/api.c.o
+[ 94%] Linking C static library libsqisign_lvl3_nistapi.a
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+[ 11%] Built target sqisign_mp_generic
+[ 11%] Built target sqisign_precomp_lvl3
+[ 33%] Built target sqisign_common_sys
+[ 44%] Built target sqisign_gf_lvl3
+[ 61%] Built target sqisign_ec_lvl3
+[ 72%] Built target sqisign_hd_lvl3
+[ 83%] Built target sqisign_verification_lvl3
+[ 88%] Built target sqisign_lvl3
+[ 94%] Built target sqisign_lvl3_nistapi
+[100%] Building C object CMakeFiles/h7_canonicality_server.dir/work/material/tools/h7_canonicality_server.c.o
+[100%] Linking C executable h7_canonicality_server
+[100%] Built target h7_canonicality_server
+runtime=persistent Broadwell canonicality verifier under qemu-x86_64 -cpu max
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "broadwell",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 3,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl3-broadwell
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl5-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl5-ref/build
+[ 10%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 10%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/ec_params.c.o
+[ 10%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/e0_basis.c.o
+[ 15%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/hd_splitting_transforms.c.o
+[ 15%] Linking C static library libsqisign_mp_generic.a
+[ 15%] Built target sqisign_mp_generic
+[ 15%] Linking C static library libsqisign_precomp_lvl5.a
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 21%] Built target sqisign_precomp_lvl5
+[ 21%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 26%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 26%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp_p27500_64.c.o
+[ 31%] Linking C static library libsqisign_common_sys.a
+[ 31%] Built target sqisign_common_sys
+[ 36%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp.c.o
+[ 36%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp2.c.o
+[ 42%] Linking C static library libsqisign_gf_lvl5.a
+[ 42%] Built target sqisign_gf_lvl5
+[ 47%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec.c.o
+[ 47%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec_jac.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xisog.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xeval.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/isog_chains.c.o
+[ 57%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/basis.c.o
+[ 57%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/biextension.c.o
+[ 63%] Linking C static library libsqisign_ec_lvl5.a
+[ 63%] Built target sqisign_ec_lvl5
+[ 63%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/hd.c.o
+[ 68%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_structure.c.o
+[ 68%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_isogenies.c.o
+[ 73%] Linking C static library libsqisign_hd_lvl5.a
+[ 73%] Built target sqisign_hd_lvl5
+[ 73%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/common.c.o
+[ 78%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/encode_verification.c.o
+[ 78%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/verify.c.o
+[ 84%] Linking C static library libsqisign_verification_lvl5.a
+[ 84%] Built target sqisign_verification_lvl5
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl5.a
+[ 89%] Built target sqisign_lvl5
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl5_nistapi.dir/nistapi/lvl5/api.c.o
+[ 94%] Linking C static library libsqisign_lvl5_nistapi.a
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 10%] Built target sqisign_precomp_lvl5
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_gf_lvl5
+[ 42%] Built target sqisign_common_sys
+[ 63%] Built target sqisign_ec_lvl5
+[ 73%] Built target sqisign_hd_lvl5
+[ 84%] Built target sqisign_verification_lvl5
+[ 89%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        291
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        291
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 292
+    },
+    "nist": {
+      "asan_finding": 292
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 5,
+  "repaired_failure_count": 0,
+  "signature_bytes": 292,
+  "tested_cases": 584,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 5,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[ 10%] Built target sqisign_precomp_lvl5
+[ 15%] Built target sqisign_mp_generic
+[ 42%] Built target sqisign_gf_lvl5
+[ 42%] Built target sqisign_common_sys
+[ 63%] Built target sqisign_ec_lvl5
+[ 73%] Built target sqisign_hd_lvl5
+[ 84%] Built target sqisign_verification_lvl5
+[ 89%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 89%] Linking C static library libsqisign_lvl5.a
+[ 89%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 15%] Built target sqisign_precomp_lvl5
+[ 15%] Built target sqisign_mp_generic
+[ 31%] Built target sqisign_common_sys
+[ 42%] Built target sqisign_gf_lvl5
+[ 63%] Built target sqisign_ec_lvl5
+[ 73%] Built target sqisign_hd_lvl5
+[ 84%] Built target sqisign_verification_lvl5
+[ 89%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 292
+    },
+    "nist": {
+      "safe_rejection": 292
+    }
+  },
+  "implementation": "ref",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 5,
+  "repaired_failure_count": 0,
+  "signature_bytes": 292,
+  "tested_cases": 584,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "ref",
+  "overlong_case_count": 200,
+  "parameter_level": 5,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl5-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl5-ref/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl5-ref
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl5-ref/build
+[  0%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/ec_params.c.o
+[  0%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/e0_basis.c.o
+[  5%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/hd_splitting_transforms.c.o
+[ 11%] Linking C static library libsqisign_precomp_lvl5.a
+[ 17%] Linking C static library libsqisign_mp_generic.a
+[ 17%] Built target sqisign_precomp_lvl5
+[ 17%] Built target sqisign_mp_generic
+[ 17%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 23%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 23%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 29%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 29%] Linking C static library libsqisign_common_sys.a
+[ 35%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp_p27500_64.c.o
+[ 35%] Built target sqisign_common_sys
+[ 35%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp.c.o
+[ 41%] Building C object src/gf/ref/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp2.c.o
+[ 41%] Linking C static library libsqisign_gf_lvl5.a
+[ 41%] Built target sqisign_gf_lvl5
+[ 41%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec.c.o
+[ 47%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec_jac.c.o
+[ 47%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xisog.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xeval.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/isog_chains.c.o
+[ 52%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/basis.c.o
+[ 58%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/biextension.c.o
+[ 58%] Linking C static library libsqisign_ec_lvl5.a
+[ 58%] Built target sqisign_ec_lvl5
+[ 58%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_structure.c.o
+[ 64%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/hd.c.o
+[ 70%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_isogenies.c.o
+[ 70%] Linking C static library libsqisign_hd_lvl5.a
+[ 70%] Built target sqisign_hd_lvl5
+[ 76%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/encode_verification.c.o
+[ 76%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/common.c.o
+[ 76%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/verify.c.o
+[ 82%] Linking C static library libsqisign_verification_lvl5.a
+[ 82%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 88%] Linking C static library libsqisign_lvl5.a
+[ 88%] Built target sqisign_lvl5
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl5_nistapi.dir/nistapi/lvl5/api.c.o
+[ 94%] Linking C static library libsqisign_lvl5_nistapi.a
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "ref",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 5,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl5-ref
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+BEGIN parser lvl5-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl5-broadwell/build
+[  5%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/ec_params.c.o
+[ 11%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 11%] Linking C static library libsqisign_mp_generic.a
+[ 11%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/e0_basis.c.o
+[ 11%] Built target sqisign_mp_generic
+[ 11%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/gf27500.c.o
+[ 16%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/hd_splitting_transforms.c.o
+[ 16%] Linking C static library libsqisign_precomp_lvl5.a
+[ 16%] Built target sqisign_precomp_lvl5
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 22%] Building ASM object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp_asm.S.o
+[ 27%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 33%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp2.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 38%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 44%] Linking C static library libsqisign_gf_lvl5.a
+[ 44%] Built target sqisign_gf_lvl5
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 50%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 50%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec.c.o
+[ 50%] Linking C static library libsqisign_common_sys.a
+[ 50%] Built target sqisign_common_sys
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xisog.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xeval.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/isog_chains.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/basis.c.o
+[ 66%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/biextension.c.o
+[ 66%] Linking C static library libsqisign_ec_lvl5.a
+[ 66%] Built target sqisign_ec_lvl5
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/hd.c.o
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_isogenies.c.o
+[ 77%] Linking C static library libsqisign_hd_lvl5.a
+[ 77%] Built target sqisign_hd_lvl5
+[ 77%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/common.c.o
+[ 83%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/encode_verification.c.o
+[ 83%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/verify.c.o
+[ 88%] Linking C static library libsqisign_verification_lvl5.a
+[ 88%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 94%] Linking C static library libsqisign_lvl5.a
+[ 94%] Built target sqisign_lvl5
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl5_nistapi.dir/nistapi/lvl5/api.c.o
+[ 94%] Linking C static library libsqisign_lvl5_nistapi.a
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_length_case.dir/work/material/tools/h7_official_length_case.c.o
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 33%] Built target sqisign_gf_lvl5
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (4.0s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/parser-lvl5-broadwell/release-build
+[ 11%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/ec_params.c.o
+[ 11%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[ 11%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/e0_basis.c.o
+[ 11%] Linking C static library libsqisign_mp_generic.a
+[ 11%] Built target sqisign_mp_generic
+[ 16%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/hd_splitting_transforms.c.o
+[ 16%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/gf27500.c.o
+[ 16%] Linking C static library libsqisign_precomp_lvl5.a
+[ 16%] Built target sqisign_precomp_lvl5
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 22%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 22%] Building ASM object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp_asm.S.o
+[ 27%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp.c.o
+[ 27%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp2.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 33%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 38%] Linking C static library libsqisign_gf_lvl5.a
+[ 38%] Built target sqisign_gf_lvl5
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 44%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 50%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 50%] Linking C static library libsqisign_common_sys.a
+[ 50%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec.c.o
+[ 50%] Built target sqisign_common_sys
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xisog.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xeval.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/isog_chains.c.o
+[ 61%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/basis.c.o
+[ 66%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/biextension.c.o
+[ 66%] Linking C static library libsqisign_ec_lvl5.a
+[ 66%] Built target sqisign_ec_lvl5
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/hd.c.o
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_structure.c.o
+[ 72%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_isogenies.c.o
+[ 77%] Linking C static library libsqisign_hd_lvl5.a
+[ 77%] Built target sqisign_hd_lvl5
+[ 77%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/common.c.o
+[ 83%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/encode_verification.c.o
+[ 83%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/verify.c.o
+[ 88%] Linking C static library libsqisign_verification_lvl5.a
+[ 88%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 94%] Linking C static library libsqisign_lvl5.a
+[ 94%] Built target sqisign_lvl5
+[ 94%] Building C object src/CMakeFiles/sqisign_lvl5_nistapi.dir/nistapi/lvl5/api.c.o
+[ 94%] Linking C static library libsqisign_lvl5_nistapi.a
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Building C object CMakeFiles/h7_official_detached_kat_verify.dir/work/material/tools/h7_official_detached_kat_verify.c.o
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 50%] Built target sqisign_common_sys
+[ 50%] Built target sqisign_gf_lvl5
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Building C object CMakeFiles/h7_detached_server.dir/work/material/tools/h7_detached_server.c.o
+[100%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+runtime=persistent Broadwell Release verifier under qemu-x86_64 -cpu max
+separation=undersized matrix remains in ASan build; exact/suffix verdicts use Release
+{
+  "asan_ranges": {
+    "detached": [
+      [
+        0,
+        291
+      ]
+    ],
+    "nist": [
+      [
+        0,
+        291
+      ]
+    ]
+  },
+  "authority_state": "unpatched",
+  "counts": {
+    "detached": {
+      "asan_finding": 292
+    },
+    "nist": {
+      "asan_finding": 292
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "asan_finding",
+    "nist": "asan_finding"
+  },
+  "parameter_level": 5,
+  "repaired_failure_count": 0,
+  "signature_bytes": 292,
+  "tested_cases": 584,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 200,
+  "authority_state": "unpatched",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 5,
+  "per_extra_length": {
+    "1": {
+      "accepted": 100
+    },
+    "16": {
+      "accepted": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 0,
+  "repaired_failure_count": 0
+}
+patching file src/sqisign.c
+Hunk #1 succeeded at 68 (offset 3 lines).
+Hunk #2 succeeded at 102 (offset 1 line).
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 27%] Built target sqisign_gf_lvl5
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 94%] Linking C static library libsqisign_lvl5.a
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_official_length_case
+[100%] Built target h7_official_length_case
+[ 11%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 33%] Built target sqisign_gf_lvl5
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 27%] Built target sqisign_gf_lvl5
+[ 50%] Built target sqisign_common_sys
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 88%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 94%] Linking C static library libsqisign_lvl5.a
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[100%] Linking C executable h7_official_detached_kat_verify
+[100%] Built target h7_official_detached_kat_verify
+[  5%] Built target sqisign_mp_generic
+[ 16%] Built target sqisign_precomp_lvl5
+[ 38%] Built target sqisign_common_sys
+[ 50%] Built target sqisign_gf_lvl5
+[ 66%] Built target sqisign_ec_lvl5
+[ 77%] Built target sqisign_hd_lvl5
+[ 88%] Built target sqisign_verification_lvl5
+[ 94%] Built target sqisign_lvl5
+[ 94%] Built target sqisign_lvl5_nistapi
+[ 94%] Linking C executable h7_detached_server
+[100%] Built target h7_detached_server
+{
+  "asan_ranges": {
+    "detached": [],
+    "nist": []
+  },
+  "authority_state": "repaired",
+  "counts": {
+    "detached": {
+      "safe_rejection": 292
+    },
+    "nist": {
+      "safe_rejection": 292
+    }
+  },
+  "implementation": "broadwell",
+  "last_undersized_results": {
+    "detached": "safe_rejection",
+    "nist": "safe_rejection"
+  },
+  "parameter_level": 5,
+  "repaired_failure_count": 0,
+  "signature_bytes": 292,
+  "tested_cases": 584,
+  "unexpected_case_count": 0
+}
+{
+  "abnormal_result_count": 0,
+  "accepted_overlong_count": 0,
+  "authority_state": "repaired",
+  "exact_baseline_accepted_count": 100,
+  "implementation": "broadwell",
+  "overlong_case_count": 200,
+  "parameter_level": 5,
+  "per_extra_length": {
+    "1": {
+      "rejected": 100
+    },
+    "16": {
+      "rejected": 100
+    }
+  },
+  "record_count": 100,
+  "rejected_overlong_count": 200,
+  "repaired_failure_count": 0
+}
+END parser lvl5-broadwell
+reason=GCC 13 LTO internal compiler error under linux/amd64 QEMU
+effect=disable interprocedural optimization only; retain requested build type
+original_sha256=11430f46ff1886fd0f18b4280ff3c8b17ce980ab2af155de82688dc9561bef78
+modified_sha256=e888e3dea1ab93d0a8a3e6859ab4ca1d840613f1dca7fa195ea3ded301c97727
+strict_mode=disabled to avoid a QEMU/GCC nonsemantic maybe-uninitialized diagnostic
+source=/work/canonicality-lvl5-broadwell/src/verification/ref/lvlx/verify.c
+original_sha256=fbd1dddacba62017b2e84593c07f91709078c7acfb5bae9336ba87436e7ef65b
+instrumented_sha256=33c06676d689894e8cf4bd746fd7f67a225f502a704368a496797898121af769
+replacement_count=16
+BEGIN canonicality lvl5-broadwell
+-- The C compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/cc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Looking for sys/types.h
+-- Looking for sys/types.h - found
+-- Looking for stdint.h
+-- Looking for stdint.h - found
+-- Looking for stddef.h
+-- Looking for stddef.h - found
+-- Check size of __uint128_t
+-- Check size of __uint128_t - done
+-- Using 64-bit radix for gf module
+-- Configuring done (3.8s)
+-- Generating done (0.1s)
+-- Build files have been written to: /work/canonicality-lvl5-broadwell/build
+[  5%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/ec_params.c.o
+[  5%] Building C object src/mp/ref/generic/CMakeFiles/sqisign_mp_generic.dir/mp.c.o
+[  5%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/e0_basis.c.o
+[ 10%] Linking C static library libsqisign_mp_generic.a
+[ 10%] Built target sqisign_mp_generic
+[ 15%] Building C object src/precomp/ref/lvl5/CMakeFiles/sqisign_precomp_lvl5.dir/hd_splitting_transforms.c.o
+[ 20%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/gf27500.c.o
+[ 20%] Linking C static library libsqisign_precomp_lvl5.a
+[ 20%] Built target sqisign_precomp_lvl5
+[ 20%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/randombytes_system.c.o
+[ 20%] Building ASM object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp_asm.S.o
+[ 25%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/fips202.c.o
+[ 30%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/fp.c.o
+[ 30%] Building C object src/gf/broadwell/lvl5/CMakeFiles/sqisign_gf_lvl5.dir/__/lvlx/fp2.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/mem.c.o
+[ 30%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/tools.c.o
+[ 35%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/aes_ni.c.o
+[ 35%] Linking C static library libsqisign_gf_lvl5.a
+[ 35%] Built target sqisign_gf_lvl5
+[ 35%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/ctr_drbg.c.o
+[ 40%] Building C object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/randombytes_ctrdrbg_aesni.c.o
+[ 40%] Building ASM object src/common/generic/CMakeFiles/sqisign_common_sys.dir/__/broadwell/vaes256_key_expansion.S.o
+[ 45%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec.c.o
+[ 50%] Linking C static library libsqisign_common_sys.a
+[ 50%] Built target sqisign_common_sys
+[ 50%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/ec_jac.c.o
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xisog.c.o
+[ 55%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/xeval.c.o
+[ 60%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/isog_chains.c.o
+[ 60%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/basis.c.o
+[ 60%] Building C object src/ec/ref/lvl5/CMakeFiles/sqisign_ec_lvl5.dir/__/lvlx/biextension.c.o
+[ 65%] Linking C static library libsqisign_ec_lvl5.a
+[ 65%] Built target sqisign_ec_lvl5
+[ 65%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/hd.c.o
+[ 70%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_structure.c.o
+[ 70%] Building C object src/hd/ref/lvl5/CMakeFiles/sqisign_hd_lvl5.dir/__/lvlx/theta_isogenies.c.o
+[ 75%] Linking C static library libsqisign_hd_lvl5.a
+[ 75%] Built target sqisign_hd_lvl5
+[ 75%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/common.c.o
+[ 80%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/encode_verification.c.o
+[ 80%] Building C object src/verification/ref/lvl5/CMakeFiles/sqisign_verification_lvl5.dir/__/lvlx/verify.c.o
+[ 85%] Linking C static library libsqisign_verification_lvl5.a
+[ 85%] Built target sqisign_verification_lvl5
+[ 90%] Building C object src/CMakeFiles/sqisign_lvl5.dir/sqisign.c.o
+[ 90%] Linking C static library libsqisign_lvl5.a
+[ 90%] Built target sqisign_lvl5
+[ 95%] Building C object src/CMakeFiles/sqisign_lvl5_nistapi.dir/nistapi/lvl5/api.c.o
+[ 95%] Linking C static library libsqisign_lvl5_nistapi.a
+[ 95%] Built target sqisign_lvl5_nistapi
+[100%] Building C object CMakeFiles/h7_official_kat_verify.dir/work/material/tools/h7_official_kat_verify.c.o
+[100%] Linking C executable h7_official_kat_verify
+[100%] Built target h7_official_kat_verify
+[ 10%] Built target sqisign_mp_generic
+[ 15%] Built target sqisign_precomp_lvl5
+[ 30%] Built target sqisign_gf_lvl5
+[ 45%] Built target sqisign_common_sys
+[ 65%] Built target sqisign_ec_lvl5
+[ 75%] Built target sqisign_hd_lvl5
+[ 85%] Built target sqisign_verification_lvl5
+[ 90%] Built target sqisign_lvl5
+[ 95%] Built target sqisign_lvl5_nistapi
+[100%] Building C object CMakeFiles/h7_canonicality_server.dir/work/material/tools/h7_canonicality_server.c.o
+[100%] Linking C executable h7_canonicality_server
+[100%] Built target h7_canonicality_server
+runtime=persistent Broadwell canonicality verifier under qemu-x86_64 -cpu max
+{
+  "abnormal_result_count": 0,
+  "baseline_accepted_count": 100,
+  "component_pair_count": 400,
+  "implementation": "broadwell",
+  "malformed_record_count": 0,
+  "mutated_verifier_call_count": 800,
+  "original_zero_component_count": 0,
+  "paired_acceptance_count": 0,
+  "paired_rejection_count": 400,
+  "parameter_level": 5,
+  "record_count": 100,
+  "rejection_stage_counts": {
+    "public_key.A.imag": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "public_key.A.real": {
+      "challenge_even_isogeny_evaluation": 200
+    },
+    "signature.E_aux_A.imag": {
+      "commitment_theta_codomain_not_split": 200
+    },
+    "signature.E_aux_A.real": {
+      "commitment_theta_codomain_not_split": 200
+    }
+  },
+  "rejection_stage_divergence_count": 0,
+  "unclassified_rejection_count": 0,
+  "verdict_divergence_count": 0
+}
+END canonicality lvl5-broadwell
+2026-08-12T00:22:40+00:00
+H7 SQIsign x86 reproduction complete

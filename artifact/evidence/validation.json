@@ -1,0 +1,26 @@
+{
+  "aggregate": {
+    "canonical_baselines_accepted": 600,
+    "canonicality_abnormal_results": 0,
+    "canonicality_mutated_calls": 4800,
+    "canonicality_paired_acceptances": 0,
+    "canonicality_paired_rejections": 2400,
+    "canonicality_pairs": 2400,
+    "repaired_exact_signatures_accepted": 600,
+    "repaired_overlong_cases": 1200,
+    "repaired_overlong_rejected": 1200,
+    "repaired_undersized_calls": 2656,
+    "repaired_undersized_safe_rejections": 2656,
+    "unpatched_exact_signatures_accepted": 600,
+    "unpatched_overlong_accepted": 1200,
+    "unpatched_overlong_cases": 1200,
+    "unpatched_undersized_asan_findings": 2656,
+    "unpatched_undersized_calls": 2656
+  },
+  "authority_count": 6,
+  "authority_revision": "dd133d7aca576c361a270c8e6434832535b42ecc",
+  "current_upstream_same_as_pinned": true,
+  "manifested_file_count": 126,
+  "schema": "isogeny-crypto/h7-fresh-reproduction-validation/v1",
+  "status": "ok"
+}

@@ -1,0 +1,53 @@
+{
+  "schema": "sqisign-verification-boundary/publication-receipt/v1",
+  "status": "PASS_FOR_PUBLIC_RELEASE",
+  "release": "v0.1.0",
+  "release_date": "2026-08-12",
+  "author": "Dana Edwards",
+  "authority": {
+    "repository": "SQISign/the-sqisign",
+    "revision": "dd133d7aca576c361a270c8e6434832535b42ecc",
+    "public_main_rechecked_date": "2026-08-12",
+    "public_main_same_as_pinned": true
+  },
+  "authorization": {
+    "maintainer_reply_date": "2026-08-12",
+    "maintainer_representative": "Decio Luiz Gazzoni Filho",
+    "scope": "Immediate public disclosure, including an issue in the official repository",
+    "reported_fix_state": "Equivalent guards in the private development tree; planned for Round 3",
+    "private_source_audited": false
+  },
+  "aggregate": {
+    "unpatched_undersized_calls": 2656,
+    "unpatched_undersized_asan_findings": 2656,
+    "repaired_undersized_safe_rejections": 2656,
+    "unpatched_exact_signatures_accepted": 600,
+    "unpatched_overlong_accepted": 1200,
+    "repaired_overlong_rejected": 1200,
+    "canonicality_pairs": 2400,
+    "canonicality_paired_acceptances": 0,
+    "canonicality_paired_rejections": 2400
+  },
+  "sha256": {
+    "preprint_pdf": "8b3a64defa121d5895a99cc02b8b42a3bb591000afc73c37bb79399b1410afbb",
+    "fresh_validation": "9f580f45a9eb959ed19f8f31b58fe05f6da1b9a6db49a8fa0b32d41f57c6dd0e",
+    "harness_material": "6b5ae681b5b1544f5369dc99fc5e8bd369fbf378cd9b9b8999d0906b347d3c46",
+    "candidate_patch": "8729522c85e7361daf3400a077a4de646fc11e8b612e71d8bece95980c49b0f9",
+    "lean_source_manifest": "0caafb1e056aa793a4f1ce5256cb290a5ce7d329b6b41f0d6acb999761f47f02"
+  },
+  "quality_checks": {
+    "latex_build_passed": true,
+    "citations_resolved": true,
+    "cross_references_resolved": true,
+    "pdf_pages": 7,
+    "all_pdf_pages_visually_inspected": true,
+    "blocker_dispositions_recorded": true
+  },
+  "nonclaims": [
+    "No signature forgery or secret-key recovery is demonstrated.",
+    "No remote-code-execution or deployment-specific exploitability claim is made.",
+    "No defect in the mathematical SQIsign security proof is established.",
+    "No SUF-CMA conclusion is claimed.",
+    "The private development source was not audited."
+  ]
+}

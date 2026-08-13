@@ -1,0 +1,6 @@
+preprint/*.aux
+preprint/*.bbl
+preprint/*.blg
+preprint/*.log
+preprint/*.out
+preprint/*.pdf

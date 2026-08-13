@@ -1,0 +1,55 @@
+=================================================================
+==1112==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x50200000002f at pc 0x55555557908e bp 0x7ffffffc5480 sp 0x7ffffffc5470
+READ of size 1 at 0x50200000002f thread T0
+    #0 0x55555557908d in sqisign_lvl1_ref_fp_decode /work/parser-lvl1-ref/src/gf/ref/lvl1/fp_p5248_64.c:689
+    #1 0x55555557c60b in sqisign_lvl1_ref_fp2_decode /work/parser-lvl1-ref/src/gf/ref/lvlx/fp2.c:311
+    #2 0x555555559a2a in fp2_from_bytes /work/parser-lvl1-ref/src/verification/ref/lvlx/encode_verification.c:55
+    #3 0x555555559a2a in sqisign_lvl1_ref_signature_from_bytes /work/parser-lvl1-ref/src/verification/ref/lvlx/encode_verification.c:197
+    #4 0x555555558ee2 in sqisign_lvl1_ref_sqisign_open /work/parser-lvl1-ref/src/sqisign.c:72
+    #5 0x555555558d5e in sqisign_lvl1_ref_crypto_sign_open /work/parser-lvl1-ref/src/nistapi/lvl1/api.c:32
+    #6 0x555555558a1f in main /work/material/tools/h7_official_length_case.c:80
+    #7 0x7ffffef071c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #8 0x7ffffef0728a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #9 0x555555558644 in _start (/work/parser-lvl1-ref/build/h7_official_length_case+0x4644) (BuildId: 566c6332146981de34c1482d7a67374ab7fdd0dd)
+
+0x50200000002f is located 1 bytes before 2-byte region [0x502000000030,0x502000000032)
+allocated by thread T0 here:
+    #0 0x7fffff1ee340 in calloc ../../../../src/libsanitizer/asan/asan_malloc_linux.cpp:77
+    #1 0x5555555589aa in main /work/material/tools/h7_official_length_case.c:71
+    #2 0x7ffffef071c9  (/lib/x86_64-linux-gnu/libc.so.6+0x2a1c9) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #3 0x7ffffef0728a in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x2a28a) (BuildId: 328820b908de8ea1ef79afa8995e302e819163d7)
+    #4 0x555555558644 in _start (/work/parser-lvl1-ref/build/h7_official_length_case+0x4644) (BuildId: 566c6332146981de34c1482d7a67374ab7fdd0dd)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow /work/parser-lvl1-ref/src/gf/ref/lvl1/fp_p5248_64.c:689 in sqisign_lvl1_ref_fp_decode
+Shadow bytes around the buggy address:
+  0x501ffffffd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501ffffffe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x501fffffff80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x502000000000: fa fa 01 fa fa[fa]02 fa fa fa fa fa fa fa fa fa
+  0x502000000080: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x502000000280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==1112==ABORTING

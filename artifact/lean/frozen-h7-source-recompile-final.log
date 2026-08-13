@@ -1,0 +1,8 @@
+BEGIN IsogenyCrypto/H7/CanonicalNormalization.lean
+PASS IsogenyCrypto/H7/CanonicalNormalization.lean
+BEGIN IsogenyCrypto/H7/SignSynchronization.lean
+PASS IsogenyCrypto/H7/SignSynchronization.lean
+BEGIN IsogenyCrypto/H7/XCoordinateFiber.lean
+PASS IsogenyCrypto/H7/XCoordinateFiber.lean
+BEGIN IsogenyCrypto/H7/XOnlyQuotient.lean
+PASS IsogenyCrypto/H7/XOnlyQuotient.lean
