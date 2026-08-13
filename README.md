@@ -28,7 +28,9 @@ fixed-length encodings are noncanonical.
 
 ## Package map
 
-- `preprint/` contains the LaTeX source and bibliography.
+- [`preprint/sqisign-verification-boundary-preprint-v0.1.0.pdf`](preprint/sqisign-verification-boundary-preprint-v0.1.0.pdf)
+  is the ready-to-read preprint; the same directory also contains its LaTeX
+  source and bibliography.
 - `artifact/evidence/` contains aggregate validation, per-authority JSON,
   representative raw sanitizer output, the complete successful replay
   transcript, and frozen harness material.
